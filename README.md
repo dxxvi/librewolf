@@ -1,5 +1,6 @@
 # librewolf
 
+```
 // ==UserScript==
 // @name        spring-documentation
 // @namespace   Violentmonkey Scripts
@@ -32,6 +33,7 @@ if (location.href.indexOf('https://docs.spring.io/spring-security/') == 0) {
     aside.toc .toc-menu a { padding-bottom: .75rem }
   `);
 }
+```
 
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIWQC5eMpmnuYCAgg
