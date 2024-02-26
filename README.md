@@ -1,10 +1,37 @@
 # librewolf
 
-GTO_GPTM_GO_DEV_RAW_TRADE_RAW_ADMIN
+// ==UserScript==
+// @name        spring-documentation
+// @namespace   Violentmonkey Scripts
+// @match       https://docs.spring.io/*html*
+// @grant       GM_addStyle
+// @description 4/23/2023, 1:05:07 PM
+// ==/UserScript==
 
-GTO_GPTM_GO_DEV_INGRESS
+GM_addStyle(`
+  .doc p { font-size: calc(19/var(--rem-base)*1rem); letter-spacing: 0 }
+  body .doc h2 {
+    display: inline-block; background: linear-gradient( 45deg, #f29913, #75dd13, #186fe0, #e018cf, #14e0c1);
+    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 }
+  body .doc h3 {
+    display: inline-block; background: linear-gradient(-45deg, #4b99f2, #8d4ee5, #dfe863, #6bea7e, #ea6769); font-weight: 500; font-family: sans-serif;
+    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 }
+  body .doc h4 {
+    display: inline-block; background: linear-gradient( 60deg, #e33939, #e548e8, #f2b94e, #4e6cf2, #6eeb4b);
+    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0; font-size: 1.5em; font-weight: 500 }
+  body .toc .toc-menu ul { font-size: calc(17/var(--rem-base)*1rem) }
+  :root:root { --toc-line-height: 1.4; --monospace-font-family: monospace; --layout-max-width: none }
+  body .doc .tabs.is-loading .tablist > ul li:first-child, body .doc .tabs:not(.is-loading) .tablist > ul li.is-selected {
+    background: linear-gradient(-45deg, #f29913, #75dd13, #186fe0, #e018cf, #14e0c1) }
+  body .doc pre { line-height: 1.5 }
+`);
 
-GTO_GPTM_GO_DEV_RAW
+if (location.href.indexOf('https://docs.spring.io/spring-security/') == 0) {
+  GM_addStyle(`
+    main .doc { max-width: none }
+    aside.toc .toc-menu a { padding-bottom: .75rem }
+  `);
+}
 
 -----BEGIN ENCRYPTED PRIVATE KEY-----
 MIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIWQC5eMpmnuYCAgg
