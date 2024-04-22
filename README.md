@@ -2,36 +2,47 @@
 
 ```
 // ==UserScript==
-// @name        spring-documentation
+// @name        github
 // @namespace   Violentmonkey Scripts
-// @match       https://docs.spring.io/*html*
+// @match       https://github.com/*
+// @match       https://docs.github.com/en/*
 // @grant       GM_addStyle
-// @description 4/23/2023, 1:05:07 PM
+// @version     1.0
+// @author      -
+// @description 10/28/2022, 5:04:47 AM
 // ==/UserScript==
 
-GM_addStyle(`
-  .doc p { font-size: calc(19/var(--rem-base)*1rem); letter-spacing: 0 }
-  body .doc h2 {
-    display: inline-block; background: linear-gradient( 45deg, #f29913, #75dd13, #186fe0, #e018cf, #14e0c1);
-    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 }
-  body .doc h3 {
-    display: inline-block; background: linear-gradient(-45deg, #4b99f2, #8d4ee5, #dfe863, #6bea7e, #ea6769); font-weight: 500; font-family: sans-serif;
-    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 }
-  body .doc h4 {
-    display: inline-block; background: linear-gradient( 60deg, #e33939, #e548e8, #f2b94e, #4e6cf2, #6eeb4b);
-    background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0; font-size: 1.5em; font-weight: 500 }
-  body .toc .toc-menu ul { font-size: calc(17/var(--rem-base)*1rem) }
-  :root:root { --toc-line-height: 1.4; --monospace-font-family: monospace; --layout-max-width: none }
-  body .doc .tabs.is-loading .tablist > ul li:first-child, body .doc .tabs:not(.is-loading) .tablist > ul li.is-selected {
-    background: linear-gradient(-45deg, #f29913, #75dd13, #186fe0, #e018cf, #14e0c1) }
-  body .doc pre { line-height: 1.5 }
-`);
-
-if (location.href.indexOf('https://docs.spring.io/spring-security/') == 0) {
+if (location.href.indexOf('https://github.com') == 0) {
   GM_addStyle(`
-    main .doc { max-width: none }
-    aside.toc .toc-menu a { padding-bottom: .75rem }
+    :root:root {
+      --base-size-16: 8px;
+      --base-size-32: 16px;
+      --fontStack-monospace: monospace;
+    }
+    body .container-xl { max-width: none }
+    body .react-repos-overview-margin { margin-right: 0 }
+    div[data-selector="repos-split-pane-content"] { max-width: none }
+    body .container-lg { max-width: none }
+    body .comment-body { font-size: 1rem }
+    nav[role="navigation"] ul { font-size: calc(1.1 * var(--body-font-size, 14px)) }
+    body .AppHeader .AppHeader-globalBar .AppHeader-context .AppHeader-context-item { padding-block: 0 }
+    body .react-directory-filename-column h3, body .react-directory-row { font-size: 1rem }
+    nav[aria-label="File Tree Navigation"] ul li div.PRIVATE_TreeView-item-container { font-size: 1rem }
+    body .react-code-text { font-size: 15px; line-height: 21px }
   `);
+  setInterval(function() {
+    document.querySelectorAll('div[data-selector="repos-split-pane-content"]').forEach(div => {
+      const parent = div.parentElement;
+      if (parent && parent.localName == 'div') parent.style.maxWidth = 'none';
+    });
+  }, 1904);
+}
+
+if (location.href.indexOf('https://docs.github.com/en') == 0) {
+  GM_addStyle([
+    'body h1 { background: linear-gradient(45deg, #f29913, #75dd13, #186fe0, #e018cf, #14e0c1);',
+    '  background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0 }'
+  ].join('\n'));
 }
 ```
 
